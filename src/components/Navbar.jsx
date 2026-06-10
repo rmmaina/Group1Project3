@@ -12,7 +12,8 @@ export default function Navbar() {
         <li><a href="#" className="active">Home</a></li>
         {/* Placeholder hook endpoints for future routing configurations */}
         <li><a href="#" className="disabled">My Bookshelf</a></li>
-        <li><a href="#" className="disabled">About</a></li>
+        <li><a href="#" className="disabled">Recommendation</a></li>
+        <li><a href="#" className="disabled">Cart</a></li>
       </ul>
       <button className="navbar-toggle" aria-label="Toggle Navigation Menu">
         <Menu />
