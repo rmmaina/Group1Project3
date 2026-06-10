@@ -1,32 +1,47 @@
 import React from 'react';
-import { Menu } from 'lucide-react';
-import icon1 from '../assets/icon1.png'; // adjust path if needed
+import { BookOpen, BookmarkCheck, Heart, Library } from 'lucide-react';
+import icon1 from '../assets/icon1.png'; 
 
-export default function Navbar() {
+export default function Navbar({ currentView, onViewChange }) {
   return (
     <nav className="navbar">
-      <div className="navbar-brand">
+              <div className="navbar-brand">
         <img
           src={icon1}
           alt="Open Library Hub Logo"
           className="nav-logo"
         />
-        <span>Open Library Hub</span>
+        <span>OpenLibrary Hub</span>
       </div>
-
       <ul className="navbar-links">
-        <li><a href="#" className="active">Home</a></li>
-        <li><a href="#" className="disabled">My Bookshelf</a></li>
-        <li><a href="#" className="disabled">Recommendation</a></li>
-        <li><a href="#" className="disabled">Cart</a></li>
+        <li>
+          <a 
+            href="#home" 
+            className={currentView === 'home' ? 'active' : ''} 
+            onClick={(e) => { e.preventDefault(); onViewChange('home'); }}
+          >
+            <Library size={16} style={{ marginRight: '4px', verticalAlign: 'text-bottom' }} /> Home
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#bookshelf" 
+            className={currentView === 'bookshelf' ? 'active' : ''} 
+            onClick={(e) => { e.preventDefault(); onViewChange('bookshelf'); }}
+          >
+            <BookmarkCheck size={16} style={{ marginRight: '4px', verticalAlign: 'text-bottom' }} /> My Bookshelf
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#favorites" 
+            className={currentView === 'favorites' ? 'active' : ''} 
+            onClick={(e) => { e.preventDefault(); onViewChange('favorites'); }}
+          >
+            <Heart size={16} style={{ marginRight: '4px', verticalAlign: 'text-bottom' }} /> Favorites
+          </a>
+        </li>
       </ul>
-
-      <button
-        className="navbar-toggle"
-        aria-label="Toggle Navigation Menu"
-      >
-        <Menu />
-      </button>
     </nav>
   );
 }

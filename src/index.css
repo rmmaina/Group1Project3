@@ -537,9 +537,101 @@ main {
 }
 
 .nav-logo {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   object-fit: cover;
   border-radius: 50%; /* optional */
 }
 
+/* ==========================================================================
+   10. BOOKSHELF & FAVORITES INTERACTIVE UI
+   ========================================================================== */
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border-color);
+  z-index: 5;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s var(--transition-smooth);
+}
+
+.action-btn:hover {
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+}
+
+.action-btn.active-bookshelf {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #16a34a;
+}
+
+.action-btn.active-favorite {
+  background-color: #fff1f2;
+  border-color: #fecdd3;
+  color: #e11d48;
+}
+
+/* Star Rating Framework Component */
+.rating-system {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+.rating-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #cbd5e1;
+  transition: transform 0.1s var(--transition-smooth);
+}
+
+.star-btn:hover {
+  transform: scale(1.15);
+}
+
+.star-btn.filled {
+  color: #eab308;
+}
+
+.empty-view-state {
+  text-align: center;
+  padding: 5rem 2rem;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-color);
+  max-width: 500px;
+  margin: 4rem auto;
+}
+
+.empty-view-state p {
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
