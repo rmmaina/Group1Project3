@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'lucide-react';
-import icon1 from '../assets/icon1.jpg'; // adjust path if needed
+import icon1 from '../assets/icon1.png'; // adjust path if needed
 
 export default function Navbar() {
   return (
