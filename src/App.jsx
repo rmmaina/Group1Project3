@@ -8,6 +8,7 @@ import Favorites from "./features/books/Favorites.jsx";
 import { fetchBooks } from "./features/books/bookService.js";
 import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import BookCard from "./features/books/BookCard.jsx";
+import BookClub from "./features/books/BookClub.jsx";
 
 export default function App() {
   // Navigation Architecture State Hooks
@@ -182,6 +183,17 @@ export default function App() {
             onToggleBookshelf={toggleBookshelf}
             onToggleFavorite={toggleFavorite}
             bookshelf={bookshelf}
+          />
+        )}
+
+        {view === 'bookClub' && (
+          <BookClub
+            reviewedBooks={bookshelf}
+            onSelectBook={setSelectedBook}
+            onToggleBookshelf={toggleBookshelf}
+            onToggleFavorite={toggleFavorite}
+            favorites={favorites}
+            onRateBook={handleRateBook}
           />
         )}
       </main>
