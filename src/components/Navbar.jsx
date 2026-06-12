@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, BookmarkCheck, Heart, Library } from 'lucide-react';
+import { BookOpen, BookmarkCheck, Heart, Library, Star } from 'lucide-react';
 import icon1 from '../assets/icon1.png'; 
 
 export default function Navbar({ currentView, onViewChange }) {
@@ -30,6 +30,16 @@ export default function Navbar({ currentView, onViewChange }) {
             onClick={(e) => { e.preventDefault(); onViewChange('bookshelf'); }}
           >
             <BookmarkCheck size={16} style={{ marginRight: '4px', verticalAlign: 'text-bottom' }} /> My Bookshelf
+          </a>
+        </li>
+        <li>
+          <a
+            href="#book-club"
+            className={currentView === 'bookClub' ? 'active' : ''}
+            onClick={(e) => { e.preventDefault(); onViewChange('bookClub'); }}
+          >
+            <Star size={16} style={{ marginRight: '4px', verticalAlign: 'text-bottom' }} />
+            Book Club
           </a>
         </li>
         <li>

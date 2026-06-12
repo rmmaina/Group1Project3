@@ -635,3 +635,175 @@ main {
   color: var(--text-muted);
   margin-top: 0.5rem;
 }
+
+/* ==========================================================================
+   BOOK CLUB RECOMMENDATION PAGE
+   ========================================================================== */
+
+.book-club-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.book-club-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: stretch;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-md);
+}
+
+.book-club-kicker {
+  color: var(--primary);
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.book-club-hero h1 {
+  font-size: 2.4rem;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.book-club-intro {
+  color: var(--text-muted);
+  max-width: 620px;
+  font-size: 1rem;
+}
+
+.book-club-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 1rem;
+  min-width: 420px;
+}
+
+.book-club-stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.book-club-stat-card span {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.book-club-stat-card small {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.book-club-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+}
+
+.book-club-section-heading h2 {
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.book-club-section-heading p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.book-club-ranked-card {
+  position: relative;
+}
+
+.rank-badge {
+  position: absolute;
+  top: -0.85rem;
+  left: -0.85rem;
+  z-index: 10;
+  background: var(--primary);
+  color: var(--text-inverse);
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: var(--shadow-md);
+}
+
+.review-summary {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  box-shadow: var(--shadow-sm);
+  color: #cbd5e1;
+}
+
+.review-summary span {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 0.25rem;
+}
+
+.filled-star {
+  color: #eab308;
+}
+
+@media (max-width: 900px) {
+  .book-club-hero {
+    flex-direction: column;
+  }
+
+  .book-club-stats {
+    min-width: unset;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .book-club-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .book-club-hero {
+    padding: 1.5rem;
+  }
+
+  .book-club-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .book-club-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .review-summary {
+    position: static;
+    margin-bottom: 0.75rem;
+    width: fit-content;
+  }
+}
