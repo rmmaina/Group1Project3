@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # BookHub - Online Book Ordering Platform
 
 ## Project Overview
