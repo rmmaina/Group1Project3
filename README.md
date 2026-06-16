@@ -1,191 +1,267 @@
+# 📚 OpenLibrary Hub
 
-# BookHub - Online Book Ordering Platform
+A modern, responsive Single Page Application (SPA) for discovering, organizing, and tracking books using the Open Library API.
 
-## Project Overview
-
-BookHub is a web application that enables users to browse and search for books, add books to a shopping cart, and submit orders for shipping.
-
-This project is being developed as part of a Software Engineering Bootcamp and follows an Agile team-based development approach using GitHub for collaboration and version control.
+OpenLibrary Hub enables readers to search millions of books, manage personalized reading lists, save favorites, rate books, and maintain reading notes—all within a streamlined and intuitive user experience.
 
 ---
 
-## Phase 1 Features
+## 🌟 Overview
 
-### Homepage
+OpenLibrary Hub was developed as a Software Engineering Capstone Project with a focus on:
 
-The homepage serves as the landing page for users and provides:
+* Frontend performance optimization
+* Modern React architecture
+* Responsive user experience
+* State management best practices
+* API integration and asynchronous programming
 
-* Application introduction
-* Featured books section
-* Navigation menu
-* Search bar
-* Call-to-action buttons
-
-### Book Search
-
-Users can search for books using:
-
-* Book title
-* Author name
-* Genre (future enhancement)
-
-### Product Catalogue
-
-Displays available books as product cards showing:
-
-* Book cover image
-* Title
-* Author
-* Price
-* Availability status
-* View details button
-
-### Shopping Cart
-
-Users can:
-
-* Add books to cart
-* View selected items
-* Update quantities
-* Remove items from cart
-
-### Submit Order
-
-Users can:
-
-* Review cart contents
-* Enter shipping information
-* Submit an order
-* Receive order confirmation
+The application integrates with the Open Library REST API to provide access to one of the world's largest collections of bibliographic records.
 
 ---
 
-## Tech Stack
+## 📸 Application Preview
 
-### Frontend
+> Add screenshots of your application here.
 
-* React
-* JavaScript
+### Home Page
 
-### Backend
+![Home Page](./src/assets/home-page.png)
 
-* Python
-* Flask
+### Bookshelf Tracker
 
-### Database
+![Bookshelf](./src/assets/bookshelf.png)
 
-* PostgreSQL
+### Favorites
 
-### Version Control
+![Favorites](./src/assets/favorites.png)
 
-* Git
-* GitHub
+### Reviews & Notes
 
-### Deployment
-
-* To be determined in later phases
+![Reviews](./src/assets/reviews.png)
 
 ---
 
-## Team Collaboration Workflow
+## 🚀 Features
 
-### Branching Strategy
+### 🔍 Real-Time Book Search
 
-Main branches:
+* Search books by title, author, or keyword
+* Integrated Open Library API
+* Debounced search requests (600ms delay)
+* Loading and error state handling
 
-* main → Production-ready code
-* develop → Integration branch
+### 📖 Personal Bookshelf Tracker
 
-Feature branches:
+* Save books to a personal reading collection
+* Track reading progress
+* Update status:
 
-* feature/homepage
-* feature/search
-* feature/product-cards
-* feature/cart
-* feature/submit-order
+  * Want to Read
+  * In Progress
+  * Completed
 
-### Development Process
+### ❤️ Favorites Management
 
-1. Pull latest changes from develop.
-2. Create a feature branch.
-3. Implement the assigned feature.
-4. Commit changes.
-5. Push branch to GitHub.
-6. Create a Pull Request.
-7. Team review.
-8. Merge into develop.
-9. Merge develop into main after successful testing.
+* Add or remove favorite books
+* Dedicated favorites view
+* Instant state synchronization
+
+### ⭐ Ratings & Reviews
+
+* Rate books using a star-rating system
+* Automatically organize rated books
+* Sort reviews by highest rating
+
+### 📝 Reading Notes
+
+* Add personal reflections and notes
+* Timestamped entries
+* Unique identifiers generated using `crypto.randomUUID()`
+
+### 🔔 Modern Notifications
+
+* SweetAlert2 toast notifications
+* Non-blocking user feedback
+* Improved user experience
+
+### 💾 Persistent Storage
+
+* Browser localStorage integration
+* Automatic data persistence
+* State recovery on page refresh
 
 ---
 
-## User Stories
+## 🛠️ Technology Stack
 
-### As a user
-
-* I want to view available books.
-* I want to search for books.
-* I want to add books to my cart.
-* I want to remove books from my cart.
-* I want to submit an order for shipping.
-
-### As an administrator (Future Scope)
-
-* I want to manage book inventory.
-* I want to view customer orders.
-* I want to update book listings.
+| Category      | Technology            |
+| ------------- | --------------------- |
+| Frontend      | React 19              |
+| Build Tool    | Vite                  |
+| Styling       | Tailwind CSS v4       |
+| Icons         | Lucide React          |
+| Notifications | SweetAlert2           |
+| API           | Open Library REST API |
+| Storage       | Browser localStorage  |
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```text
-bookhub/
+my-library-app/
+├── public/
+├── src/
+│   ├── assets/
+│   │   └── icon1.png
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   └── Footer.jsx
+│   ├── features/
+│   │   └── books/
+│   │       ├── BookCard.jsx
+│   │       ├── BookGrid.jsx
+│   │       ├── BookModal.jsx
+│   │       ├── Bookshelf.jsx
+│   │       ├── Favorites.jsx
+│   │       ├── Reviews.jsx
+│   │       └── bookService.js
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── vite.config.js
+├── package.json
+└── README.md
+```
 
-├── backend/
-│   ├── app.py
-│   ├── models.py
-│   ├── routes/
-│   └── requirements.txt
-│
-├── frontend/
-│   ├── src/
-│   │   ├── pages/
-│   │   ├── components/
-│   │   ├── services/
-│   │   └── assets/
-│   │
-│   └── package.json
-│
-├── docs/
-│
-├── README.md
-│
-└── .gitignore
+## ⚡ Getting Started
+
+### Prerequisites
+
+Before running the project, ensure you have:
+
+* Node.js (v18 or later)
+* npm (included with Node.js)
+
+---
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/josephndemo/capstone_library.git
+
+cd capstone_library/my-library-app
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start Development Server
+
+```bash
+npm run dev
+```
+
+### 4. Open in Browser
+
+Visit:
+
+```text
+http://localhost:5173
 ```
 
 ---
 
-## Future Enhancements
+## 🔧 Core Engineering Concepts
 
-* User Authentication
-* Wishlist Functionality
-* Order Tracking
-* Online Payments
-* Book Reviews and Ratings
-* Admin Dashboard
+### Search Debouncing
+
+To reduce unnecessary API calls, search requests are delayed until the user stops typing.
+
+```javascript
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setDebouncedTerm(searchTerm);
+    setPage(1);
+  }, 600);
+
+  return () => clearTimeout(timer);
+}, [searchTerm]);
+```
+
+### Local Storage Persistence
+
+Application state is automatically synchronized with browser storage.
+
+```javascript
+useEffect(() => {
+  localStorage.setItem(
+    "bookshelf",
+    JSON.stringify(bookshelf)
+  );
+}, [bookshelf]);
+```
+
+### Tailwind CSS v4 + Vite Integration
+
+```javascript
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+});
+```
 
 ---
 
-## Contributors
+## 🎯 Key Learning Outcomes
 
-Moringa Software Engineering Bootcamp Team - Joseph Ndemo, Rotich Ian, Mark Warunge, Robert Maina and Gregory Kipchumba
+Through this project, I gained practical experience in:
+
+* React component architecture
+* State management using Hooks
+* REST API integration
+* Asynchronous JavaScript
+* Performance optimization
+* Tailwind CSS v4 workflow
+* User-centered design principles
+* Modern build tooling with Vite
 
 ---
 
-## License
+## 🗺️ Future Roadmap
 
-This project is for educational purposes only.
-=======
+### Phase 2
+
+* Flask or Node.js backend integration
+* PostgreSQL database
+* RESTful API services
+
+### Phase 3
+
+* JWT authentication
+* User accounts and profiles
+* Cloud deployment
+
+### Future Enhancements
+
+* Reading analytics dashboard
+* Monthly reading statistics
+* Personalized recommendations
+* Community discussions
+* Social sharing features
+
+---
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -202,5 +278,13 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> 162200c (Home page styling and read API)
 Updated contributor tracking
+=======
+## 👨‍💻 Developer
+
+1.Joseph Ndemo
+2.Mark Warunge
+3.Gregory Kipchumba
+4.Abdirahman Abdi Salah
+5.Robert Maina
+
