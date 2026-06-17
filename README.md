@@ -1,4 +1,4 @@
-# 📚 OpenLibrary Hub
+# OpenLibrary Hub
 
 A modern, responsive Single Page Application (SPA) for discovering, organizing, and tracking books using the Open Library API.
 
@@ -6,7 +6,7 @@ OpenLibrary Hub enables readers to search millions of books, manage personalized
 
 ---
 
-## 🌟 Overview
+## Overview
 
 OpenLibrary Hub was developed as a Software Engineering Capstone Project with a focus on:
 
@@ -20,7 +20,7 @@ The application integrates with the Open Library REST API to provide access to o
 
 ---
 
-## 📸 Application Preview
+## Application Preview
 
 > Add screenshots of your application here.
 
@@ -42,16 +42,16 @@ The application integrates with the Open Library REST API to provide access to o
 
 ---
 
-## 🚀 Features
+## Features
 
-### 🔍 Real-Time Book Search
+### Real-Time Book Search
 
 * Search books by title, author, or keyword
 * Integrated Open Library API
 * Debounced search requests (600ms delay)
 * Loading and error state handling
 
-### 📖 Personal Bookshelf Tracker
+### Personal Bookshelf Tracker
 
 * Save books to a personal reading collection
 * Track reading progress
@@ -61,31 +61,31 @@ The application integrates with the Open Library REST API to provide access to o
   * In Progress
   * Completed
 
-### ❤️ Favorites Management
+### Favorites Management
 
 * Add or remove favorite books
 * Dedicated favorites view
 * Instant state synchronization
 
-### ⭐ Ratings & Reviews
+### Ratings & Reviews
 
 * Rate books using a star-rating system
 * Automatically organize rated books
 * Sort reviews by highest rating
 
-### 📝 Reading Notes
+### Reading Notes
 
 * Add personal reflections and notes
 * Timestamped entries
 * Unique identifiers generated using `crypto.randomUUID()`
 
-### 🔔 Modern Notifications
+### Modern Notifications
 
 * SweetAlert2 toast notifications
 * Non-blocking user feedback
 * Improved user experience
 
-### 💾 Persistent Storage
+### Persistent Storage
 
 * Browser localStorage integration
 * Automatic data persistence
@@ -93,7 +93,7 @@ The application integrates with the Open Library REST API to provide access to o
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Category      | Technology            |
 | ------------- | --------------------- |
@@ -107,7 +107,7 @@ The application integrates with the Open Library REST API to provide access to o
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 my-library-app/
@@ -135,7 +135,7 @@ my-library-app/
 └── README.md
 ```
 
-## ⚡ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -176,7 +176,7 @@ http://localhost:5173
 
 ---
 
-## 🔧 Core Engineering Concepts
+## Core Engineering Concepts
 
 ### Search Debouncing
 
@@ -223,7 +223,7 @@ export default defineConfig({
 
 ---
 
-## 🎯 Key Learning Outcomes
+## Key Learning Outcomes
 
 Through this project, I gained practical experience in:
 
@@ -238,7 +238,7 @@ Through this project, I gained practical experience in:
 
 ---
 
-## 🗺️ Future Roadmap
+## Future Roadmap
 
 ### Phase 2
 
@@ -280,11 +280,11 @@ The React Compiler is not enabled on this template because of its impact on dev 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 Updated contributor tracking
 =======
-## 👨‍💻 Developer
+## Developer
 
 1.Joseph Ndemo
 2.Mark Warunge
 3.Gregory Kipchumba
 4.Abdirahman Abdi Salah
 5.Robert Maina
-
+6.Rotich Ian
