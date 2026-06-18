@@ -152,7 +152,7 @@ Before running the project, ensure you have:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/josephndemo/capstone_library.git
+git clone https://github.com/rmmaina/capstone_library.git
 
 cd capstone_library/my-library-app
 ```
