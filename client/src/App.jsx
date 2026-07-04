@@ -1,5 +1,4 @@
 // Updated frontend documentation
-
 import React, { useState, useEffect } from 'react';
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -7,6 +6,7 @@ import BookGrid from "./features/books/BookGrid.jsx";
 import BookModal from "./features/books/BookModal.jsx";
 import Bookshelf from "./features/books/Bookshelf.jsx";
 import Favorites from "./features/books/Favorites.jsx";
+import ManageBooks from "./features/books/manageBooks";
 import { fetchBooks } from "./features/books/bookService.js";
 import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import BookCard from "./features/books/BookCard.jsx";
@@ -166,6 +166,17 @@ export default function App() {
             )}
           </>
         )}
+         {view === 'manageBooks' && (
+          <ManageBooks
+            books={books}
+            onSelectBook={setSelectedBook}
+            onToggleBookshelf={toggleBookshelf}
+            onToggleFavorite={toggleFavorite}
+            bookshelf={bookshelf}
+            favorites={favorites}
+            onRateBook={handleRateBook}
+          />
+       )} 
 
         {view === 'bookshelf' && (
           <Bookshelf 
