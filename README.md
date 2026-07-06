@@ -291,10 +291,9 @@ inside **ManageBooks.jsx**.
 - Robert Maina
 - Joseph Ndemo
 - Mark Warunge
-- Abdirahman Abdi Salah
 - Gregory Kipchumba
 - Rotich Ian
-
+- Abdirahman Abdi Salah
 ---
 
 # License
