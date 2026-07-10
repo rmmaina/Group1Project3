@@ -6,9 +6,12 @@ Users can search thousands of books from the Open Library API, organize their pe
 
 ---
 
+
+[![Live Demo](https://img.shields.io/website?down_message=offline&label=Live%20Demo&up_message=online&url=https%3A%2F%2Fopenlibrary20.vercel.app)](https://openlibrary20.vercel.app)
+
 # Live Demo
 
-https://openlibrary20.vercel.app/
+[https://openlibrary20.vercel.app](https://openlibrary20.vercel.app)
 
 ---
 
