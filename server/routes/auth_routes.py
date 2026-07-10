@@ -91,3 +91,12 @@ def login():
 
     token = serializer.dumps({'id': user.id})
     return {'access_token': token, 'user': user.to_dict()}
+
+
+@app.route('/auth/me', methods=['GET'])
+@token_required
+def me():
+    user = getattr(g, 'current_user', None)
+    if not user:
+        return {}, 404
+    return user.to_dict()
