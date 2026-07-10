@@ -5,6 +5,9 @@ import os
 
 app = Flask(__name__)
 
+# security
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret')
+
 # =========================
 # DATABASE CONFIG (FIXED FOR DEPLOYMENT)
 # =========================
@@ -30,6 +33,7 @@ from models import Book, Review
 # =========================
 from routes.book_routes import *
 from routes.review_routes import *
+from routes.auth_routes import *
 
 # =========================
 # RUN APP (RENDER READY)
