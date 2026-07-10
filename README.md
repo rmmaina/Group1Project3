@@ -139,42 +139,42 @@ The repository includes project screenshots in the `images/` folder. Below are t
 
 ### Home
 
-![Home](images/home.png)
+![Home](images/home-v2.png)
 _Catalog view with search and featured picks._
 
 ### Manage Books (Admin)
 
-![Manage Books](images/managebooks.png)
+![Manage Books](images/managebooks-v2.png)
 _Admin inventory screen for adding, editing and removing titles._
 
 ### Bookshelf
 
-![Bookshelf](images/bookshelf.png)
+![Bookshelf](images/bookshelf-v2.png)
 _Personal shelf showing your saved books and progress._
 
 ### Favorites
 
-![Favorites](images/favorites.png)
+![Favorites](images/favorites-v2.png)
 _Quick access to books you've marked as favorites._
 
 ### Book Club
 
-![Book Club](images/bookclub.png)
+![Book Club](images/bookclub-v2.png)
 _Community-driven reviews, rankings and discussions._
 
 ### Admin Dashboard
 
-![Admin](images/admin.png)
+![Admin](images/admin-v2.png)
 _Overview for administrators: metrics and management tools._
 
 ### Reviews
 
-![Reviews](images/reviews.png)
+![Reviews](images/reviews-v2.png)
 _Moderation and review list used by the book club._
 
 ### User Profile
 
-![User Profile](images/user.png)
+![User Profile](images/user-v2.png)
 _User profile page showing account info and activity._
 
 ---
