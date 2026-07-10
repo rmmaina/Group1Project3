@@ -80,7 +80,8 @@ https://github.com/rmmaina/Group1Project3
 │   │   │           └── ranking.js
 │   │   ├── App.jsx
 
-This project uses Flask-Migrate / Alembic. From the `server` folder run:
+This project uses Flask-Migrate / Alembic.
+From the `server` folder run
 
 ```bash
 # set FLASK_APP if needed

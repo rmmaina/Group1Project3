@@ -28,6 +28,8 @@ async function request(path, options = {}) {
 export const authApi = {
   register: async (payload) => await request('/auth/register', { method: 'POST', json: payload }),
   login: async (payload) => await request('/auth/login', { method: 'POST', json: payload }),
+  me: async () => await request('/auth/me', { method: 'GET', json: false }),
+  updateProfile: async (payload) => await request('/auth/me', { method: 'PATCH', json: payload }),
 };
 
 export const booksApi = {
