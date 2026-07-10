@@ -35,7 +35,7 @@ https://github.com/rmmaina/Group1Project3
 # Technologies Used
 
 ## Frontend
-
+- React
 - JavaScript (ES6)
 - CSS3
 - Fetch API
