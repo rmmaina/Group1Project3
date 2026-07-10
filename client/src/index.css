@@ -1562,6 +1562,143 @@ main {
   animation: authGuestScroll 28s linear infinite;
 }
 
+/* Account page styling */
+.account {
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+}
+
+.account-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 28px;
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+}
+
+.account-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.account-label {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+.account-role {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+.account-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.form-field span {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #334155;
+}
+
+.account-form input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 0.88rem 1rem;
+  font-size: 0.96rem;
+  color: #0f172a;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.account-form input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.account-form .input-error {
+  border-color: #f87171;
+}
+
+.field-error {
+  color: #b91c1c;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.field-note {
+  color: #475569;
+  font-size: 0.82rem;
+}
+
+.account-submit-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.25rem;
+  font-weight: 800;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.account-submit-btn:disabled {
+  opacity: 0.66;
+  cursor: not-allowed;
+}
+
+.account-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.account-message {
+  margin-top: 0.75rem;
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.account-message.success {
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+}
+
+.account-message.error {
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
 .auth-guest-carousel:hover .auth-guest-track {
   animation-play-state: paused;
 }
