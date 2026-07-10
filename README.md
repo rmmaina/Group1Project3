@@ -14,7 +14,7 @@ https://openlibrary20.vercel.app/
 
 # GitHub Repository
 
-https://github.com/rmmaina/Group1Project2
+https://github.com/rmmaina/Group1Project3
 
 ---
 
@@ -58,7 +58,7 @@ https://github.com/rmmaina/Group1Project2
 # Project Structure
 
 ```
-Group1Project2/
+Group1Project3/
 │
 ├── client/
 │   ├── src/
