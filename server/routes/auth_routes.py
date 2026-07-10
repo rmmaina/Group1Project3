@@ -4,9 +4,39 @@ from config import db
 from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import URLSafeTimedSerializer
+from functools import wraps
+from flask import request, g
 
 
 serializer = URLSafeTimedSerializer(app.config.get('SECRET_KEY', 'devsecret'), salt='auth-token')
+
+
+def _get_token_from_header():
+    auth = request.headers.get('Authorization', '')
+    if auth and auth.startswith('Bearer '):
+        return auth.split(' ', 1)[1].strip()
+    return None
+
+
+def token_required(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        token = _get_token_from_header()
+        if not token:
+            return {'message': 'Missing token'}, 401
+        try:
+            payload = serializer.loads(token)
+            user_id = payload.get('id')
+            user = User.query.get(user_id)
+            if not user:
+                return {'message': 'Invalid token'}, 401
+            g.current_user = user
+        except Exception:
+            return {'message': 'Invalid or expired token'}, 401
+
+        return f(*args, **kwargs)
+
+    return wrapper
 
 
 @app.route('/auth/register', methods=['POST'])
