@@ -141,42 +141,41 @@ ADMIN_USER=admin ADMIN_EMAIL=admin@example.com ADMIN_PASSWORD=secret python serv
 
 ---
 
-# Screenshots
+## Screenshots
 
-Add your screenshots inside the **images** folder.
+The repository includes project screenshots in the `images/` folder. Below are the primary views captured from the app.
 
-Example:
-
-```
-images/
-├── home.png
-├── manage-books.png
-├── bookshelf.png
-├── favorites.png
-└── bookclub.png
-```
-
-Then display them like this:
-
-## Home
+### Home
 
 ![Home](images/home.png)
 
-## Manage Books
+### Manage Books (Admin)
 
-![Manage Books](images/manage-books.png)
+![Manage Books](images/managebooks.png)
 
-## Bookshelf
+### Bookshelf
 
 ![Bookshelf](images/bookshelf.png)
 
-## Favorites
+### Favorites
 
 ![Favorites](images/favorites.png)
 
-## Book Club
+### Book Club
 
 ![Book Club](images/bookclub.png)
+
+### Admin Dashboard
+
+![Admin](images/admin.png)
+
+### Reviews
+
+![Reviews](images/reviews.png)
+
+### User Profile
+
+![User Profile](images/user.png)
 
 ---
 
