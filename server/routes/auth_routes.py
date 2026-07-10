@@ -39,6 +39,18 @@ def token_required(f):
     return wrapper
 
 
+def admin_required(f):
+    @wraps(f)
+    @token_required
+    def wrapper(*args, **kwargs):
+        user = getattr(g, 'current_user', None)
+        if not user or user.role != 'admin':
+            return {'message': 'Admin privileges required'}, 403
+        return f(*args, **kwargs)
+
+    return wrapper
+
+
 @app.route('/auth/register', methods=['POST'])
 def register():
     data = request.get_json() or {}

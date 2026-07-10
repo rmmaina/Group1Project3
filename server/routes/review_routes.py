@@ -2,6 +2,7 @@ from flask import request
 from app import app
 from config import db
 from models import Review
+from routes.auth_routes import admin_required
 
 
 # =========================
@@ -24,6 +25,7 @@ def get_review(id):
 # CREATE REVIEW
 # =========================
 @app.route("/reviews", methods=["POST"])
+@admin_required
 def create_review():
     data = request.get_json()
 
@@ -43,6 +45,7 @@ def create_review():
 # UPDATE REVIEW
 # =========================
 @app.route("/reviews/<int:id>", methods=["PATCH"])
+@admin_required
 def update_review(id):
     review = Review.query.get_or_404(id)
     data = request.get_json()
@@ -59,6 +62,7 @@ def update_review(id):
 # DELETE REVIEW
 # =========================
 @app.route("/reviews/<int:id>", methods=["DELETE"])
+@admin_required
 def delete_review(id):
     review = Review.query.get_or_404(id)
 

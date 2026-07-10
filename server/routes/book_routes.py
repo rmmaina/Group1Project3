@@ -2,7 +2,7 @@ from flask import request, g
 from app import app
 from config import db
 from models import Book
-from routes.auth_routes import token_required
+from routes.auth_routes import token_required, admin_required
 
 
 # =========================
@@ -25,7 +25,7 @@ def get_book(id):
 # CREATE BOOK
 # =========================
 @app.route("/books", methods=["POST"])
-@token_required
+@admin_required
 def create_book():
     data = request.get_json()
 
@@ -46,7 +46,7 @@ def create_book():
 # UPDATE BOOK
 # =========================
 @app.route("/books/<int:id>", methods=["PATCH"])
-@token_required
+@admin_required
 def update_book(id):
     book = Book.query.get_or_404(id)
     data = request.get_json()
@@ -64,7 +64,7 @@ def update_book(id):
 # DELETE BOOK
 # =========================
 @app.route("/books/<int:id>", methods=["DELETE"])
-@token_required
+@admin_required
 def delete_book(id):
     book = Book.query.get_or_404(id)
 
