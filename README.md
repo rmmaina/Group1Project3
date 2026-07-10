@@ -62,10 +62,29 @@ Group1Project3/
 │
 ├── client/
 │   ├── src/
+│   │   ├── assets/
 │   │   ├── components/
 │   │   ├── features/
-│   │   │   └── books/
+│   │   │   ├── books/
+│   │   │   └── bookClub/
+│   │   │       ├── components/
+│   │   │       │   ├── BookClubCard.jsx
+│   │   │       │   ├── LoadingSkeleton.jsx
+│   │   │       │   ├── ReviewForm.jsx
+│   │   │       │   ├── ReviewList.jsx
+│   │   │       │   └── StarRating.jsx
+│   │   │       ├── context/
+│   │   │       │   ├── BookClubContext.jsx
+│   │   │       │   ├── bookClubContext.js
+│   │   │       │   └── useBookClub.js
+│   │   │       ├── data/
+│   │   │       │   └── mockBookClubData.js
+│   │   │       ├── services/
+│   │   │       │   └── bookClubService.js
+│   │   │       └── utils/
+│   │   │           └── ranking.js
 │   │   ├── App.jsx
+│   │   ├── index.css
 │   │   └── main.jsx
 │   ├── package.json
 │   └── vite.config.js
@@ -73,15 +92,19 @@ Group1Project3/
 ├── server/
 │   ├── app.py
 │   ├── config.py
-│   ├── models.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── book.py
+│   │   └── review.py
 │   ├── routes/
-│   ├── seed.py
+│   │   ├── book_routes.py
+│   │   └── review_routes.py
 │   ├── migrations/
+│   ├── seed.py
 │   ├── requirements.txt
-│   └── venv/
+│   └── README.md
 │
 ├── images/
-│
 ├── README.md
 └── PROJECT_PITCH.md
 ```
