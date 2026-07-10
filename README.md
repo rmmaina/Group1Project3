@@ -352,12 +352,12 @@ inside **ManageBooks.jsx**.
 
 # Future Improvements
 
-- User authentication
-- User accounts
-- Reading progress tracker
-- Dark mode
-- Advanced search filters
-- Book recommendations
+- [x] User authentication
+- [x] User accounts
+- [ ] Reading progress tracker
+- [ ] Dark mode
+- [ ] Advanced search filters
+- [ ] Book recommendations
 
 ---
 
