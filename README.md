@@ -84,16 +84,46 @@ Group1Project3/
 │   │   │       └── utils/
 │   │   │           └── ranking.js
 │   │   ├── App.jsx
-│   │   ├── index.css
-│   │   └── main.jsx
-│   ├── package.json
-│   └── vite.config.js
+
+This project uses Flask-Migrate / Alembic. From the `server` folder run:
+
+```bash
+# set FLASK_APP if needed
+export FLASK_APP=app.py
+flask db migrate -m "create users and other tables"
+flask db upgrade
+```
+
+Windows PowerShell:
+
+```powershell
+$env:FLASK_APP = 'app.py'
+flask db migrate -m "create users and other tables"
+flask db upgrade
+```
 │
 ├── server/
 │   ├── app.py
 │   ├── config.py
 │   ├── models/
 │   │   ├── __init__.py
+
+### Create an admin user (optional)
+
+An admin seeding helper is provided at `server/scripts/create_admin.py`. After migrations run:
+
+Interactive:
+
+```bash
+python server/scripts/create_admin.py
+```
+
+Or non-interactive using environment variables:
+
+```bash
+ADMIN_USER=admin ADMIN_EMAIL=admin@example.com ADMIN_PASSWORD=secret python server/scripts/create_admin.py
+```
+
 │   │   ├── book.py
 │   │   └── review.py
 │   ├── routes/
@@ -260,6 +290,20 @@ PUT     /books/<id>
 DELETE  /books/<id>
 ```
 
+Note: `POST`, `PUT/PATCH`, and `DELETE` on `/books` are protected and require an authenticated admin token.
+
+## Auth
+
+```
+POST    /auth/register
+POST    /auth/login
+GET     /auth/me
+```
+
+- `POST /auth/register` — create a new user (returns `access_token` and `user`).
+- `POST /auth/login` — authenticate and receive an `access_token` and `user`.
+- `GET /auth/me` — return the currently authenticated user (requires `Authorization: Bearer <token>`).
+
 ## Reviews
 
 ```
@@ -269,6 +313,8 @@ POST    /reviews
 PUT     /reviews/<id>
 DELETE  /reviews/<id>
 ```
+
+Note: `POST`, `PUT/PATCH`, and `DELETE` on `/reviews` are protected and require an authenticated admin token.
 
 ---
 
