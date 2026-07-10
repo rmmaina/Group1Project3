@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Navbar({ currentView, onViewChange, user, onLogout }) {
+export default function Navbar({ currentView, onViewChange }) {
   return (
     <nav className="navbar">
 
@@ -47,17 +47,6 @@ export default function Navbar({ currentView, onViewChange, user, onLogout }) {
         >
           Favorites
         </button>
-
-        <button
-          className={currentView === "account" ? "active" : ""}
-          onClick={() => onViewChange("account")}
-        >
-          Account
-        </button>
-
-        {user ? (
-          <button className="logout" onClick={onLogout}>Sign out</button>
-        ) : null}
 
       </div>
     </nav>

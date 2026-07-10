@@ -28,7 +28,6 @@ https://github.com/rmmaina/Group1Project3
 - Add and remove books from your personal Bookshelf
 - Save favorite books
 - Rate books in the Book Club
-- Register, login, and manage your account
 - Add new books
 - Edit existing books
 - Delete books
@@ -81,8 +80,7 @@ https://github.com/rmmaina/Group1Project3
 │   │   │           └── ranking.js
 │   │   ├── App.jsx
 
-This project uses Flask-Migrate / Alembic.
-From the `server` folder run
+This project uses Flask-Migrate / Alembic. From the `server` folder run:
 
 ```bash
 # set FLASK_APP if needed
@@ -302,13 +300,11 @@ Note: `POST`, `PUT/PATCH`, and `DELETE` on `/books` are protected and require an
 POST    /auth/register
 POST    /auth/login
 GET     /auth/me
-PATCH   /auth/me
 ```
 
 - `POST /auth/register` — create a new user (returns `access_token` and `user`).
 - `POST /auth/login` — authenticate and receive an `access_token` and `user`.
 - `GET /auth/me` — return the currently authenticated user (requires `Authorization: Bearer <token>`).
-- `PATCH /auth/me` — update the authenticated user's username, email, or password.
 
 ## Reviews
 
@@ -352,12 +348,12 @@ inside **ManageBooks.jsx**.
 
 # Future Improvements
 
-- [x] User authentication
-- [x] User accounts
-- [ ] Reading progress tracker
-- [ ] Dark mode
-- [ ] Advanced search filters
-- [ ] Book recommendations
+- User authentication
+- User accounts
+- Reading progress tracker
+- Dark mode
+- Advanced search filters
+- Book recommendations
 
 ---
 

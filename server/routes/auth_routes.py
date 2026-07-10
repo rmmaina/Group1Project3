@@ -100,33 +100,3 @@ def me():
     if not user:
         return {}, 404
     return user.to_dict()
-
-
-@app.route('/auth/me', methods=['PATCH'])
-@token_required
-def update_me():
-    user = getattr(g, 'current_user', None)
-    if not user:
-        return {'message': 'Not found'}, 404
-
-    data = request.get_json() or {}
-    username = data.get('username')
-    email = data.get('email')
-    password = data.get('password')
-
-    if username and username != user.username:
-        if User.query.filter(User.username == username).first():
-            return {'message': 'Username already in use'}, 400
-        user.username = username
-
-    if email and email != user.email:
-        if User.query.filter(User.email == email).first():
-            return {'message': 'Email already in use'}, 400
-        user.email = email
-
-    if password:
-        user.password_hash = generate_password_hash(password)
-
-    db.session.commit()
-
-    return user.to_dict()
