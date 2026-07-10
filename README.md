@@ -28,42 +28,34 @@ https://github.com/rmmaina/Group1Project3
 - Add new books
 - Edit existing books
 - Delete books
-- PostgreSQL database integration
 - RESTful Flask API
 - Responsive interface
 
 ---
-
 # Technologies Used
 
 ## Frontend
 
-- React (Vite)
 - JavaScript (ES6)
 - CSS3
 - Fetch API
 - Lucide React Icons
-
 ## Backend
 
 - Python
 - Flask
-- Flask SQLAlchemy
 - Flask Migrate
 - Flask CORS
 - PostgreSQL
 
----
 
 # Project Structure
 
 ```
-Group1Project3/
 │
 ├── client/
 │   ├── src/
 │   │   ├── assets/
-│   │   ├── components/
 │   │   ├── features/
 │   │   │   ├── books/
 │   │   │   └── bookClub/
