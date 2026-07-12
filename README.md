@@ -81,8 +81,7 @@ https://github.com/rmmaina/Group1Project3
 │   │   │           └── ranking.js
 │   │   ├── App.jsx
 
-This project uses Flask-Migrate / Alembic.
-From the `server` folder run
+This project uses Flask-Migrate / Alembic.From the `server` folder run
 
 ```bash
 # set FLASK_APP if needed
@@ -375,4 +374,4 @@ This project was developed for educational purposes only.
 
 It is intended for learning and academic submission.
 
-No commercial use is intended.# 
+No commercial use is intended.
