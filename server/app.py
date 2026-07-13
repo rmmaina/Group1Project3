@@ -9,9 +9,19 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret')
 
 # =========================
-# DATABASE CONFIG (FIXED FOR DEPLOYMENT)
+# DATABASE CONFIG (POSTGRESQL)
 # =========================
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///library.db"
+database_url = os.environ.get(
+    "DATABASE_URL",
+    "postgresql://username:password@localhost/library_db"
+)
+
+# Render/Heroku-style URLs sometimes use "postgres://" which SQLAlchemy
+# no longer accepts; normalize to "postgresql://"
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # =========================
