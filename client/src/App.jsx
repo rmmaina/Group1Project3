@@ -1,5 +1,5 @@
 // Root application shell that orchestrates authenticated user flows,
-// catalog browsing, shelves, favorites, and admin management views.
+// catalog browsing, shelves, favorites, admin management views, and checkout.
 import { useState, useEffect } from 'react';
 import { showError, showInfo, showSuccess } from './utils/swal.js';
 import Navbar from './components/Navbar.jsx';
@@ -9,10 +9,14 @@ import AuthPanel from './components/AuthPanel.jsx';
 import BookModal from './features/books/BookModal.jsx';
 import Bookshelf from './features/books/Bookshelf.jsx';
 import Favorites from './features/books/Favorites.jsx';
-import { Search } from 'lucide-react';
+import { Search, ShoppingCart } from 'lucide-react';
 import BookCard from './features/books/BookCard.jsx';
 import BookClub from './features/bookClub/BookClub.jsx';
+import Cart from './features/cart/Cart.jsx';
+import Checkout from './features/cart/Checkout.jsx';
+import { CartProvider, useCart } from './context/CartContext.jsx';
 import { booksApi, favoritesApi, shelvesApi } from './api/client.js';
+import './features/cart/cart.css';
 
 const defaultCover = 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=400';
 
@@ -33,6 +37,11 @@ const normalizeBook = (book) => {
     isbn: book.isbn || null,
     subjects: book.subjects || [],
     rating: book.rating || 0,
+    price: typeof book.price === 'number' ? book.price : 0,
+    stock: typeof book.stock === 'number' ? book.stock : 0,
+    current_page: typeof book.current_page === 'number' ? book.current_page : 0,
+    total_pages: typeof book.total_pages === 'number' ? book.total_pages : null,
+    progress_percent: typeof book.progress_percent === 'number' ? book.progress_percent : 0,
     backendId: book.id || null,
     external_id: book.external_id || book.id || null,
     cover_url:
@@ -54,7 +63,7 @@ const getBookKey = (book) => {
   return rawKey == null ? '' : String(rawKey);
 };
 
-export default function App() {
+function AppContent() {
   // Default admins into admin workflows and readers into the home catalog.
   const [view, setView] = useState(() => {
     const savedUser = localStorage.getItem('library_user');
@@ -85,6 +94,8 @@ export default function App() {
   const [customBookError, setCustomBookError] = useState('');
   const [editingBook, setEditingBook] = useState(null);
   const [editDraft, setEditDraft] = useState({ title: '', author: '', notes: '', first_published: '', publisher: '', cover_url: '' });
+
+  const { cartCount } = useCart();
 
   useEffect(() => {
     const loadUserBooks = async () => {
@@ -226,6 +237,27 @@ export default function App() {
     } catch (err) {
       setError(err.message || 'Could not update book progress.');
       showError('Progress update failed', err.message || 'Could not update book progress.');
+    }
+  };
+
+  const handlePageProgressChange = async (bookId, currentPage, totalPages) => {
+    const normalizedBook = bookshelf.find((entry) => getBookKey(entry) === bookId || entry.id === bookId);
+    const backendId = normalizedBook?.backendId;
+
+    if (!backendId || !currentShelfId) return;
+
+    try {
+      const payload = { current_page: currentPage };
+      if (totalPages !== null && totalPages !== undefined && totalPages !== '') {
+        payload.total_pages = totalPages;
+      }
+      const updatedBook = await shelvesApi.updateBook(currentShelfId, backendId, payload);
+      const normalizedUpdatedBook = normalizeBook(updatedBook);
+      setBookshelf((prev) => prev.map((book) => (getBookKey(book) === bookId || book.backendId === backendId ? normalizedUpdatedBook : book)));
+      showSuccess('Progress saved', `Now at page ${currentPage}${totalPages ? ` of ${totalPages}` : ''}.`);
+    } catch (err) {
+      setError(err.message || 'Could not update reading progress.');
+      showError('Progress update failed', err.message || 'Could not update reading progress.');
     }
   };
 
@@ -430,6 +462,17 @@ export default function App() {
         user={user}
         onLogout={handleLogout}
       />
+
+      {/* Floating cart button — works regardless of whether Navbar has a slot for it yet */}
+      <button
+        type="button"
+        className="floating-cart-btn"
+        onClick={() => handleViewChange('cart')}
+        aria-label="View cart"
+      >
+        <ShoppingCart size={20} />
+        {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+      </button>
 
       <main className={view === 'bookClub' ? 'main-book-club' : undefined}>
         {authNotice && <div className="status-message">{authNotice}</div>}
@@ -668,6 +711,7 @@ export default function App() {
             favorites={favorites}
             onRateBook={handleRateBook}
             onProgressChange={handleProgressChange}
+            onPageProgressChange={handlePageProgressChange}
           />
         )}
 
@@ -690,6 +734,17 @@ export default function App() {
             favorites={favorites}
             onRateBook={handleRateBook}
             onSaveComment={handleSaveComment}
+          />
+        )}
+
+        {view === 'cart' && (
+          <Cart onCheckout={() => handleViewChange('checkout')} />
+        )}
+
+        {view === 'checkout' && (
+          <Checkout
+            onBack={() => handleViewChange('cart')}
+            onOrderComplete={() => handleViewChange('home')}
           />
         )}
       </main>
@@ -759,5 +814,13 @@ export default function App() {
       )}
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <CartProvider>
+      <AppContent />
+    </CartProvider>
   );
 }

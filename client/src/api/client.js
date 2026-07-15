@@ -56,4 +56,34 @@ export const bookClubApi = {
   },
 };
 
-export default { authApi, booksApi, bookClubApi };
+export const shelvesApi = {
+  list: async () => await request('/shelves', { method: 'GET', json: false }),
+  create: async (payload) => await request('/shelves', { method: 'POST', json: payload }),
+  listBooks: async (shelfId) => await request(`/shelves/${shelfId}/books`, { method: 'GET', json: false }),
+  addBook: async (shelfId, payload) => await request(`/shelves/${shelfId}/books`, { method: 'POST', json: payload }),
+  updateBook: async (shelfId, bookId, payload) =>
+    await request(`/shelves/${shelfId}/books/${bookId}`, { method: 'PATCH', json: payload }),
+  removeBook: async (shelfId, bookId) =>
+    await request(`/shelves/${shelfId}/books/${bookId}`, { method: 'DELETE', json: false }),
+};
+
+export const favoritesApi = {
+  list: async () => await request('/favorites', { method: 'GET', json: false }),
+  create: async (payload) => await request('/favorites', { method: 'POST', json: payload }),
+  removeByExternalId: async (externalId) =>
+    await request(`/favorites?external_id=${encodeURIComponent(externalId)}`, { method: 'DELETE', json: false }),
+};
+
+export const ordersApi = {
+  create: async (payload) => await request('/orders', { method: 'POST', json: payload }),
+  list: async () => await request('/orders', { method: 'GET', json: false }),
+  get: async (id) => await request(`/orders/${id}`, { method: 'GET', json: false }),
+};
+
+export const usersApi = {
+  list: async () => await request('/users', { method: 'GET', json: false }),
+  update: async (userId, payload) => await request(`/users/${userId}`, { method: 'PATCH', json: payload }),
+  remove: async (userId) => await request(`/users/${userId}`, { method: 'DELETE', json: false }),
+};
+
+export default { authApi, booksApi, bookClubApi, shelvesApi, favoritesApi, ordersApi, usersApi };
