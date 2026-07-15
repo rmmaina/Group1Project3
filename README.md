@@ -103,25 +103,15 @@ https://github.com/rmmaina/Group1Project3
 │   │   │       │   └── bookClubService.js
 │   │   │       └── utils/
 │   │   │           └── ranking.js
-│   │   ├── App.jsx
-
-This project uses Flask-Migrate / Alembic.
-From the `server` folder run
-
-```bash
-# set FLASK_APP if needed
-export FLASK_APP=app.py
-flask db migrate -m "create users and other tables"
-flask db upgrade
-```
-
-Windows PowerShell:
-
-```powershell
-$env:FLASK_APP = 'app.py'
-flask db migrate -m "create users and other tables"
-flask db upgrade
-```
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── AuthPanel.jsx
+│   │   │   └── ManageUsers.jsx
+│   │   ├── utils/
+│   │   │   └── swal.js
+│   │   └── App.jsx
+│   └── package.json
 │
 ├── server/
 │   ├── app.py
@@ -512,4 +502,4 @@ This project was developed for educational purposes only.
 
 It is intended for learning and academic submission.
 
-No commercial use is intended.# 
+No commercial use is intended.
