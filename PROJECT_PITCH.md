@@ -1,232 +1,189 @@
-# Open Library Book System – Project Pitch & Plan
+# OpenLibrary Hub - Final Project Pitch
+
+**Team:** Robert Maina, Joseph Ndemo, Mark Warunge, Gregory Kipchumba, Rotich Ian,
+Abdirahman Abdi Salah
 
 ---
 
-## 1. Problem the Application Solves
+## Part 1: Business Problem Scenario
 
-The Open Library Book System solves the problem of poor organization and lack of structure in tracking books and personal reading experiences.
+### Who is our user?
 
-Many readers struggle with:
-- Keeping track of books they have read or want to read
-- Writing and storing reviews in one place
-- Remembering ratings or opinions over time
-- Managing book information in a structured and searchable way
+Two kinds of users use this application.
 
-This project focuses on improving **organization, tracking, and information management** in the context of reading.
+Readers are people who want to discover new books, keep track of what they're reading,
+save favorites, rate and review titles, and buy books, all without switching between a
+notes app, a spreadsheet, and a separate bookstore tab.
 
----
+Administrators are the people responsible for keeping the book catalog accurate. That
+means adding new titles, fixing details, setting prices and stock, and moderating user
+accounts when needed.
 
-## 2. Target Users & Their Challenges
+### What is their goal or need?
 
-### Target Users:
-- Students
-- Avid readers
-- Book club members
-- Researchers and learners
+Readers want a single place to:
+- search a large, real catalog of books instead of a small hand-typed list
+- track what they're currently reading, including how far through a book they are
+- keep favorites separate from books they're just planning to read
+- see what other readers are rating highly, to help decide what to pick up next
+- actually buy a book once they've decided on it, without leaving the app
 
-### Daily frustrations they face:
-- Losing track of books they’ve read
-- No centralized place to store reviews
-- Difficulty organizing reading lists
-- Forgetting book ratings or personal notes
-- Using scattered tools (notes apps, paper, or memory)
+Admins need a way to manage the catalog and its users without touching the database
+directly.
 
----
+### Why is this need important, and what happens if it's unmet?
 
-## 3. Value of the Solution
+Without a single tool, readers end up relying on scattered solutions. A sticky note for
+"books to read." A separate app for ratings. A browser bookmark for buying. Every
+handoff between these tools is a place where progress gets lost: a forgotten title, an
+untracked page count, a favorite that never gets revisited. Reading is a habit that
+depends on consistency, so that friction adds up over time and makes the habit harder
+to keep.
 
-This system adds value by:
+For admins, an unmanaged catalog becomes unreliable. Prices go stale, stock counts go
+untracked, and there's no way to remove a problem account. That undermines trust in the
+whole platform.
 
-- Centralizing book and review management in one application
-- Streamlining CRUD operations for books and reviews
-- Reducing friction in storing and retrieving reading information
-- Improving organization and accessibility of data
-- Saving time by avoiding manual tracking methods
+### How will our app solve this need?
 
----
+OpenLibrary Hub is a full-stack web application built with React, Flask, and a SQL
+database. For readers, it provides:
 
-## 4. External API / Service Usage
+- live search against the Open Library API for a real, large catalog
+- a personal bookshelf with reading progress tracking (current page, total pages, and a
+  status that updates automatically as you read)
+- a favorites list kept separate from the bookshelf
+- a Book Club ranking view that surfaces the reader's own highest-rated books as
+  recommendations
+- a cart and checkout flow with a choice of payment method (Debit Card, Credit Card,
+  Visa, M-Pesa, or PayPal). Payment is simulated for this project, but the checkout flow
+  is built so a real payment gateway could be substituted in later.
 
-The application uses a RESTful API built with Flask to handle communication between the frontend and backend.
+For admins, it provides:
 
-If extended, the system could integrate external APIs such as:
-- Open Library API for fetching book metadata automatically
-- Google Books API for enhanced search and book information
-
-This would improve usability by reducing manual data entry.
-
----
-
-## 5. Project Goals & User Stories
-
-### Primary Goals:
-- Allow users to manage books efficiently
-- Enable users to create, update, and delete reviews
-- Provide a structured system for storing reading data
-
-### User Stories:
-- As a user, I want to add a book so I can track what I read
-- As a user, I want to view all books so I can browse my collection
-- As a user, I want to add a review so I can record my thoughts
-- As a user, I want to update a book so I can fix mistakes or add details
-- As a user, I want to delete a book so I can remove irrelevant entries
+- full control over the book catalog: title, author, price, stock, and page count
+- a user management view to change roles or remove accounts, with safeguards so an
+  admin can't accidentally lock themselves out
 
 ---
 
-## 6. Technical Strategy & Project Plan
+## Part 2: Problem-Solving Process
 
-### Step-by-Step Development Process
+### Development stages
 
-1. **Planning & Research**
-   - Define requirements
-   - Design database structure
-   - Identify API endpoints
+We broke the build into seven stages, done roughly in this order.
 
-2. **Backend Setup & Modeling**
-   - Create Flask application
-   - Design models (Book, Review)
-   - Setup PostgreSQL database
-   - Implement CRUD API routes
+1. Define data models and relationships: User, Book, Review, Shelf/ShelfBook, Favorite,
+   Order/OrderItem, with foreign keys tying shelf entries and orders back to both users
+   and books.
+2. Scaffold the Flask API with protected routes: endpoints for /auth, /books, /reviews,
+   /shelves, /favorites, /orders, and /users, with admin-only routes gated separately
+   from regular authenticated routes.
+3. Implement user authentication using a signed, time-limited access token (via
+   itsdangerous, not a session cookie or a full JWT library), issued on login and
+   register, then required as a Bearer token on protected routes.
+4. Build the React UI with fetches and form handling: a single-page app with
+   view-based navigation rather than URL routing, a shared API client, and
+   feature-scoped components for books, cart, and Book Club.
+5. Add route protection and conditional rendering so admin-only views (Manage Books,
+   Manage Users) stay hidden from regular readers at the component level, matching the
+   backend's own role checks.
+6. Test CRUD operations and the auth flow end to end, using curl against every
+   endpoint (register, login, create, read, update, delete) before trusting the UI
+   layer to catch problems on its own.
+7. Style and finalize the UI/UX using Tailwind CSS v4, plus hand-written stylesheets
+   for the cart, checkout, and reading-progress components specifically.
 
-3. **Frontend Development**
-   - Build React components
-   - Create UI for books and reviews
-   - Connect frontend to backend using Axios/fetch
+### Conceptual plan
 
-4. **Integration**
-   - Connect frontend with REST API
-   - Test data flow between client and server
+```
+┌─────────────────────┐        HTTPS/REST         ┌──────────────────────┐
+│   React (Vite) SPA   │  ───────────────────────▶ │   Flask REST API      │
+│                      │  ◀─────────────────────── │                      │
+│ - Home / Catalog     │      JSON + Bearer token   │ - /auth              │
+│ - Bookshelf + progress│                            │ - /books             │
+│ - Favorites          │                            │ - /reviews           │
+│ - Book Club rankings │                            │ - /shelves           │
+│ - Cart / Checkout    │                            │ - /favorites         │
+│ - Manage Books/Users │                            │ - /orders            │
+└─────────────────────┘                            │ - /users             │
+                                                     └──────────┬───────────┘
+                                                                │ SQLAlchemy ORM
+                                                                ▼
+                                                     ┌──────────────────────┐
+                                                     │  SQL Database         │
+                                                     │  (SQLite dev /        │
+                                                     │   PostgreSQL prod)    │
+                                                     │  users, books,        │
+                                                     │  reviews, shelves,    │
+                                                     │  shelf_books,         │
+                                                     │  favorites, orders,   │
+                                                     │  order_items          │
+                                                     └──────────────────────┘
+```
 
-5. **Testing & Debugging**
-   - Test CRUD operations
-   - Fix API errors and UI bugs
-   - Validate database relationships
+Authentication method: token-based, not session-based. On login, the backend issues a
+signed token (itsdangerous.URLSafeTimedSerializer) that embeds the user's ID. The
+frontend stores this token in localStorage and attaches it as an Authorization Bearer
+header on every request that needs identity. A token_required decorator validates the
+token and loads the current user. An admin_required decorator adds a role check on top
+of that.
 
-6. **Documentation & Presentation**
-   - Finalize README
-   - Prepare project pitch
-   - Deploy frontend application
+### Anticipated challenges
 
----
+Auth bugs were an expected source of trouble. Getting the token flow right on both ends
+(issuing, storing, attaching, validating) matters because a missing Authorization
+header looks identical to "not logged in" from the frontend's point of view, which
+makes the actual cause harder to spot.
 
-## 7. Conceptual Design
+Environment drift is another concern: keeping local development (SQLite, port 10000)
+and production (PostgreSQL on Render and Vercel) in sync, particularly around CORS
+origins and environment variables.
 
-### Features Overview
-- Book management system
-- Review system linked to books
-- REST API backend
-- PostgreSQL relational database
-- React frontend UI
+Ownership logic needed care too. A shelf entry, favorite, or order should only be
+readable or editable by the user who owns it, not by any logged-in user. That meant
+scoping nearly every query by user ID instead of trusting a client-supplied ID.
 
-### Data Models
-
-**Book**
-- id
-- title
-- author
-- genre
-- description
-
-**Review**
-- id
-- rating
-- comment
-- book_id (foreign key)
-
-### Relationship
-- One Book → Many Reviews
-
----
-
-## 8. React Component Breakdown
-
-- App (main container)
-- BookList (displays books)
-- BookForm (add/update books)
-- ReviewList (shows reviews)
-- ReviewForm (submit reviews)
-- API Service Layer (handles backend calls)
-
----
-
-## 9. Tools & Technologies
-
-### Backend:
-- Python
-- Flask
-- Flask SQLAlchemy
-- Flask Migrate
-- Flask CORS
-- PostgreSQL
-
-### Frontend:
-- React (Vite)
-- JavaScript
-- Axios / Fetch API
-
-### Development Tools:
-- Git & GitHub
-- VS Code
-- Postman (API testing)
+Cross-team file integration turned out to be a real, ongoing effort rather than a
+one-time setup step. With six people contributing files independently, keeping imports,
+folder structure, and prop shapes consistent across components took active
+coordination throughout the build.
 
 ---
 
-## 10. Alignment with Project Rubric
+## Part 3: Timeline and Scope
 
-This project satisfies key rubric requirements:
+### Estimated time allocation
 
-- ✔ Full CRUD functionality (Books & Reviews)
-- ✔ At least 2 related data models (One-to-Many relationship)
-- ✔ Clean REST API architecture
-- ✔ Responsive React frontend
-- ✔ External API readiness (optional extension)
-- ✔ Clear documentation and project structure
+| Phase | Estimated Time |
+|---|---|
+| Business problem identification | 0.5 day |
+| Project planning, database and model design | 1 day |
+| Project planning, UI wireframing | 1 day |
+| Backend implementation and auth | 3 days |
+| Frontend structure and fetches | 3 days |
+| UI polish and error handling | 1.5 days |
+| Reflection and video creation | 0.5 day |
 
----
+### Milestones
 
-## 11. Timeline & Scope
+1. Seek feedback through the Project Critique, once backend and core frontend flows
+   (auth, catalog, bookshelf) are functional but before final polish begins.
+2. Iterate based on that feedback, incorporating notes on scope, UX clarity, or edge
+   cases we missed.
+3. Debug, test, and finalize: a dedicated pass across every endpoint and every UI flow
+   (cart, checkout, progress tracker, admin views) before submission, confirming there
+   are no console errors and no broken CRUD paths.
 
-### Phase 1: Planning
-- Requirements gathering
-- Database design
+### Tools and topics researched before and during the project
 
-### Phase 2: Backend Development
-- Flask API setup
-- Database modeling
-- CRUD implementation
+- Flask-Migrate and Alembic, for schema migrations as the models changed over time
+- Flask-Limiter, for rate limiting on sensitive endpoints
+- Flask-CORS configuration, for restricting which origins are allowed
+- Tailwind CSS v4's Vite plugin integration, which changed significantly from v3's
+  PostCSS-based setup
+- itsdangerous as a lighter alternative to a full JWT library for signing tokens
+- Render and Vercel deployment workflows for the backend and frontend
 
-### Phase 3: Frontend Development
-- React UI components
-- API integration
-
-### Phase 4: Testing
-- Debugging backend routes
-- UI testing
-
-### Phase 5: Documentation & Submission
-- README finalization
-- Pitch preparation
-- Deployment
-
----
-
-## 12. Timeline Considerations
-
-- Work is divided into manageable phases
-- Time allocated for debugging and iteration
-- Research included for APIs and tools if needed
-- Buffer time included for testing and improvements
-
----
-
-## 13. Conclusion
-
-The Open Library Book System is a structured full-stack application designed to simplify how users manage books and reviews.
-
-It demonstrates key software engineering principles including:
-- Full-stack development
-- REST API design
-- Database relationships
-- Component-based frontend architecture
-
-The system is scalable and can be extended with external APIs and additional features in future iterations.
+This pitch reflects both what we planned going in and, now that the build is largely
+done, what actually held up in practice.
